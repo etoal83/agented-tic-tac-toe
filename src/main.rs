@@ -1,9 +1,15 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
-fn Square(cx: Scope) -> Element {
+#[derive(Props, PartialEq)]
+struct SquareProps {
+    value: i32,
+}
+
+fn Square(cx: Scope<SquareProps>) -> Element {
     cx.render(rsx!(
         button { class: "square",
+            "{cx.props.value}"
         }
     ))
 }
@@ -16,7 +22,7 @@ fn Board(cx: Scope) -> Element {
 
     fn RenderSquare(cx: Scope<RenderSquareProps>) -> Element {
         cx.render(rsx!{
-            Square()
+            Square { value: cx.props.nth }
         })
     }
     
