@@ -7,9 +7,12 @@ struct SquareProps {
 }
 
 fn Square(cx: Scope<SquareProps>) -> Element {
+    let state = use_state(&cx, || "");
+
     cx.render(rsx!(
         button { class: "square",
-            "{cx.props.value}"
+            onclick: move |_| state.set("X"),
+            "{state}",
         }
     ))
 }
